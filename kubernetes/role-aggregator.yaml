@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: monitoring
+  name: aggregator-role
+rules:
+  - apiGroups: [""]  # Core API group
+    resources: ["pods", "jobs", "configmaps", "secrets"]  # Resources the CronJob needs
+    verbs: ["get", "list", "watch", "create", "update", "delete"]  # Actions allowed
+  - apiGroups: ["batch"]
+    resources: ["cronjobs"]
+    verbs: ["create", "list", "watch"]
